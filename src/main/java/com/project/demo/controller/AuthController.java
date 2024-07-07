@@ -32,7 +32,7 @@ public class AuthController {
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
         UserDto user = new UserDto();
-        model.addAttribute(user);
+        model.addAttribute("user",user);
         return "register";
     }
 
@@ -45,7 +45,7 @@ public class AuthController {
             result.rejectValue("email", null, " This email is already registered");
         }
 
-        if(result.hasErrors()){
+        if(result.hasErrors()){  // It makes sure that the form data is still there if any validation error occurs
             model.addAttribute("user", userDto);
             return "/register";
         }
